@@ -1,0 +1,12 @@
+salt-ssh:
+  config_dir: ./config
+  roster_file: ./config/roster
+  master_config: ./config/master
+  ssh_log_file: /tmp/salt-ssh.log
+  ssh_max_procs: 8
+  ssh_priv: agent-forwarding
+  ssh_rand_thin_dir: True
+  ssh_tty: True
+  ssh_wipe: True
+  # ssh_sudo: True
+  # ssh_user: ubuntu

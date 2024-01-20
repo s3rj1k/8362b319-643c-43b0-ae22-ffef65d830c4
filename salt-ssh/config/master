@@ -1,0 +1,7 @@
+cachedir: /tmp/salt
+file_roots:
+  base:
+    - ./states
+pillar_roots:
+  base:
+    - ./pillar

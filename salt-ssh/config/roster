@@ -1,0 +1,4 @@
+vpn:
+  host: 172.104.242.11
+  user: root
+  priv: ~/.ssh/id_ed25519

@@ -1,0 +1,11 @@
+# IP addresses to listen on, separated by spaces or commas. Also accepts ports.
+local-address=127.0.0.1, {{ address }}
+
+# Suppress logging of questions and answers
+quiet=no
+
+# If set, only allow these comma separated netmasks to recurse
+allow-from=127.0.0.0/8, {{ address }}/{{ network_prefix }}
+
+# Filename containing an optional 'lua' script that will be used to modify dns answers
+lua-dns-script=/etc/powerdns/override.lua

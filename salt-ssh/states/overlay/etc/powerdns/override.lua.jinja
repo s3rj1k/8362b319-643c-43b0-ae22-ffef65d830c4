@@ -1,0 +1,26 @@
+-- List of domains to be redirected (curl https://ifconfig.io | curl --interface wg0 https://ifconfig.io)
+local redirectDomains = {
+{% for el in proxy_domains %}
+  {%- set formatted_el = '"' ~ el ~ '."' -%}
+  {%- if not loop.last -%}
+    {%- set formatted_el = formatted_el ~ ',' -%}
+  {%- endif -%}
+  {{- formatted_el | indent(4, true) }}
+{% endfor -%}
+}
+
+function domainMatch(qname, domain)
+    -- Check for exact match or subdomain match
+    return qname == domain or qname:find("%."..domain.."$")
+end
+
+function preresolve(dq)
+    local qname = dq.qname:toString()
+    for _, domain in pairs(redirectDomains) do
+        if domainMatch(qname, domain) then
+            dq:addAnswer(pdns.A, "{{ address }}")
+            return true
+        end
+    end
+    return false
+end
